@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-01T09:48:12-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my Ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington. 
+</subtitle><entry><title type="html">Building The Forge: Database</title><link href="http://localhost:4000/jekyll/update/2016/11/30/Setting-Up-A-Database.html" rel="alternate" type="text/html" title="Building The Forge: Database" /><published>2016-11-30T00:00:00-05:00</published><updated>2016-11-30T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/11/30/Setting-Up-A-Database</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/11/30/Setting-Up-A-Database.html">&lt;p&gt;The database for The Forge was created using postgresql. 
+   If you would like to create your own database 
+   you can follow these basic steps on how I created mine and adapt
+   information as needed to fit your own needs.&lt;/p&gt;
+
+&lt;p&gt;The first I needed to create the database it’s self. I did that as follows:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt;CREATE DATABASE The_forge&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now I needed tables in my database. 
+   For the first version of this webapp I decided to keep things
+   pretty simple. 
+   As the database gets more complex you will see follow up posts describing
+   the changes I made.&lt;/p&gt;
+
+&lt;p&gt;I started things with just one table. 
+   This table will store all of my information for a rosary that I have made. 
+   As time goes on and we develop The Forge we will begin to Normalize our tables. 
+   Naturlly, once we begin the process of Normalization will will see more tables emerge.&lt;/p&gt;
+
+&lt;p&gt;creating the table looked like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+CREATE TABLE rosaries( 
+   r_id serial primary key
+   rosary_name varchar(30) NOT NULL, 
+   our_father_bead varchar(30) NOT NULL, 
+   hail_Mary_bead varchar(30) NOT NULL, 
+   hope_bead varchar(30) NOT NULL, 
+   center_piece varchar(30) NOT NULL, 
+   crucifix varchar(30) NOT NULL, 
+   color varchar(30) NOT NULL,
+   recipiant varchar(30) NOT NULL
+ );&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;To give a little context for those columns in the chart:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;rosary_name is the name given to the rosary, usually adapted from the saint prayed with.&lt;/li&gt;
+  &lt;li&gt;our_father_bead, hail_mary_bead, and hope_bead are the colors for the three types of beads on the rosary.&lt;/li&gt;
+  &lt;li&gt;center_piece and crucifix are the type of centerpiece and crucifix that I used.&lt;/li&gt;
+  &lt;li&gt;color is the color of the rosary findings (gold, silver, ect.).&lt;/li&gt;
+  &lt;li&gt;recipient is who I gave the rosary to.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the table was created I could start adding things to it. 
+A basic insert statement looked like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt;INSERT into rosaries (rosary_name, our_father_bead, hail_mary_bead, hope_bead, center_piece, crucifix, color, recipiant)
+   VALUES (Albert, blue, redswirl, red, miracilous medal, standard crucifix, silver, maddie)&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You will see the types of quires that I used to acsess the table 
+   when I talk about how I set up the actual web-app using flask, so stay tuned for that.&lt;/p&gt;</content><summary type="html">The database for The Forge was created using postgresql. 
+   If you would like to create your own database 
+   you can follow these basic steps on how I created mine and adapt
+   information as needed to fit your own needs.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2016/11/23/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2016-11-23T19:12:44-05:00</published><updated>2016-11-23T19:12:44-05:00</updated><id>http://localhost:4000/jekyll/update/2016/11/23/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/11/23/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
