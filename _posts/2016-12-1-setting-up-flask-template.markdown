@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Building The Forge: Flask Template Part 1"
-date:   2016-11-30 
+date:   2016-12-1
 categories: jekyll update
 ---
 
