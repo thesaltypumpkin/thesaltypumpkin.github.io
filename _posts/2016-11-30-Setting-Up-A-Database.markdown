@@ -54,7 +54,7 @@ Once the table was created I could start adding things to it.
 A basic insert statement looked like this: 
 {% highlight postgresql %}
 INSERT into rosaries (rosary_name, our_father_bead, hail_mary_bead, hope_bead, center_piece, crucifix, color, recipiant)
-   VALUES (Albert, blue, redswirl, red, miracilous medal, standard crucifix, silver, maddie)
+   VALUES (Albert, blue, redswirl, red, miraculous medal, standard crucifix, silver, maddie)
 {% endhighlight %}
 
 You will see the types of quires that I used to acsess the table 

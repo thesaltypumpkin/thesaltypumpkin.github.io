@@ -29,9 +29,11 @@ email: bmwill1995@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
    Building The Forge is a developer blog that takes you through 
    the development of a personal web app that will be used to keep 
-   track of all of the rosaries that I make for my Ministry The Forge Custom Rosaries. 
+   track of all of the rosaries that I make for my ministry The Forge Custom Rosaries. 
    The skills showcased on this website were learned in COMPSCI 350 (databases) at 
    The University of Mary Washington. 
+   There will also be posts called "detours" that will show case skills that I have learned 
+   are not part of Building The Forge. 
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: thesaltypumpkin

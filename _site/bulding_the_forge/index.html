@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Building The Forge: Database</title>
-  <meta name="description" content="The database for The Forge was created using postgresql. If you would like to create your own database you can follow these basic steps on how I created mine...">
+  <title>Building The Forge</title>
+  <meta name="description" content="Building The Forge is a developer blog that takes you through the development of a personal web app that will be used to keep track of all of the rosaries th...">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/update/2016/11/30/Setting-Up-A-Database.html">
+  <link rel="canonical" href="http://localhost:4000/bulding_the_forge/">
   <link rel="alternate" type="application/rss+xml" title="Building The Forge" href="/feed.xml">
   
   
@@ -62,71 +62,34 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Building The Forge: Database</h1>
-    <p class="post-meta"><time datetime="2016-11-30T00:00:00-05:00" itemprop="datePublished">Nov 30, 2016</time></p>
+    <h1 class="post-title">Building The Forge</h1>
   </header>
 
-  <div class="post-content" itemprop="articleBody">
-    <p>The database for The Forge was created using postgresql. 
-   If you would like to create your own database 
-   you can follow these basic steps on how I created mine and adapt
-   information as needed to fit your own needs.</p>
+  <div class="post-content">
+    <p>I am currently a junior at the University of Mary Washington with a double major in English and Computer Science. 
+    While both are things that I enjoy, neither one is the thing that I love.</p>
 
-<p>The first I needed to create the database it’s self. I did that as follows:</p>
+<p>My real, for lack of a better word, passion is making rosaries. Truth be told, my future isn’t in computer science. It’s not in English. After I graduate I am applying to Focus missions. It’s an organization with missionaries all across the United States on College campuses.</p>
 
-<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql">CREATE DATABASE The_forge</code></pre></figure>
+<p>Long story made short, depression almost killed me several years ago. A focus missionary, Nick Grevas, reached out to me and brought me back into the Chuch. Up until I met him I had on been self destructing, I had been hurting myself, I had been hurting others, I was angry, and lost. Nick pulled me back in. Nick put me on the path of letting God forgive me, and I have been unapolagetically catholic ever since.</p>
 
-<p>Now I needed tables in my database. 
-   For the first version of this webapp I decided to keep things
-   pretty simple. 
-   As the database gets more complex you will see follow up posts describing
-   the changes I made.</p>
+<p>So I don’t want a job in software develpoment. And that might seem counter intuative, seeing as my entire college career so far has set me up for that. I want a job in being there for people, who were lost like me. I want a job in loving people, and giving people a hand in encountering God and reencountering god, and remembering that they are loved. Just like every single missionary I have met, in focus, has reminded me that I am loved.</p>
 
-<p>I started things with just one table. 
-   This table will store all of my information for a rosary that I have made. 
-   As time goes on and we develop The Forge we will begin to Normalize our tables. 
-   Naturlly, once we begin the process of Normalization will will see more tables emerge.</p>
+<p>Extending that, I don’t want a career in computer science. Thing is I make rosaries. That is where my life is right now. Everything that I do, everything that I learn, is applied to that. I don’t know much, I’m not an expert on vocation or callings or anything like that. But I know with about 83% certainty that God wants me making rosaries.</p>
 
-<p>creating the table looked like this:</p>
+<p>Every computer science skill that I pick up, that goes into how to further my ministry. That is why I am still in this major. This blog, takes you through one practical thing that I have learned, and how I plan to use it to further my ministry.</p>
 
-<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
-CREATE TABLE rosaries( 
-   r_id serial primary key
-   rosary_name varchar(30) NOT NULL, 
-   our_father_bead varchar(30) NOT NULL, 
-   hail_Mary_bead varchar(30) NOT NULL, 
-   hope_bead varchar(30) NOT NULL, 
-   center_piece varchar(30) NOT NULL, 
-   crucifix varchar(30) NOT NULL, 
-   color varchar(30) NOT NULL,
-   recipiant varchar(30) NOT NULL
- );</code></pre></figure>
+<p>I am literally Building the Forge. That is my career. This is the story of how I am building The Forge. Right now you see how I am developing a webapp to help with my record keeping. In the future you’ll see more of my story. So stay tuned, stay holy, and always pray.</p>
 
-<p>To give a little context for those columns in the chart:</p>
-<ul>
-  <li>rosary_name is the name given to the rosary, usually adapted from the saint prayed with.</li>
-  <li>our_father_bead, hail_mary_bead, and hope_bead are the colors for the three types of beads on the rosary.</li>
-  <li>center_piece and crucifix are the type of centerpiece and crucifix that I used.</li>
-  <li>color is the color of the rosary findings (gold, silver, ect.).</li>
-  <li>recipient is who I gave the rosary to.</li>
-</ul>
+<p>-Brian Will</p>
 
-<p>Once the table was created I could start adding things to it. 
-A basic insert statement looked like this:</p>
-
-<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql">INSERT into rosaries (rosary_name, our_father_bead, hail_mary_bead, hope_bead, center_piece, crucifix, color, recipiant)
-   VALUES (Albert, blue, redswirl, red, miraculous medal, standard crucifix, silver, maddie)</code></pre></figure>
-
-<p>You will see the types of quires that I used to acsess the table 
-   when I talk about how I set up the actual web-app using flask, so stay tuned for that.</p>
-
+<p>Gal 6:9</p>
 
   </div>
 
-  
 </article>
 
       </div>
