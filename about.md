@@ -7,7 +7,7 @@ permalink: /bulding_the_forge/
 I am currently a junior at the University of Mary Washington with a double major in English and Computer Science. 
     While both are things that I enjoy, neither one is the thing that I love. 
 
-My real, for lack of a better word, passion is making rosaries. Truth be told, my future isn't in computer science. It's not in English. After I graduate I am applying to Focus missions. It's an organization with missionaries all across the United States on College campuses. 
+My real, for lack of a better word, passion is making rosaries. Truth be told, my future isn't in computer science. It's not in English. After I graduate I am applying to Focus. It's an organization with missionaries all across the United States on College campuses. 
 
 Long story made short, depression almost killed me several years ago. A focus missionary, Nick Grevas, reached out to me and brought me back into the Chuch. Up until I met him I had on been self destructing, I had been hurting myself, I had been hurting others, I was angry, and lost. Nick pulled me back in. Nick put me on the path of letting God forgive me, and I have been unapolagetically catholic ever since. 
 
