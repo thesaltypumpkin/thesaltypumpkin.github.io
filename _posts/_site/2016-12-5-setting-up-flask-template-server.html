@@ -1,0 +1,61 @@
+<p>In our last post we talked about the html set up for our flask template. 
+    Today we will talk about the server.py file that launches our website, 
+    and ties everything togeather.</p>
+
+<p>Right now my server.py is pretty short. So get a good look at the code here:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+    <span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">mainIndex</span><span class="p">():</span>
+
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
+
+    <span class="nd">@app.route</span><span class="p">(</span><span class="s">'/add_rosary'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">addrosary</span><span class="p">():</span> 
+
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'add_rosary.html'</span><span class="p">)</span>
+
+        <span class="c"># start the server</span>
+    <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'IP'</span><span class="p">,</span> <span class="s">'0.0.0.0'</span><span class="p">),</span> <span class="n">port</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'PORT'</span><span class="p">,</span> <span class="mi">8080</span><span class="p">)),</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+<p>Let’s break this down a bit. This is a super basic server file. Right now I am just rendering the two HTML pages 
+    that we discussed in part one.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span></code></pre></figure>
+
+<p>This is importing the necissary packages to make this file work. In terms of flask, rather than importing everything from the package we are just importing what we need. As we make this app more complex 
+    we will be adding more things to the list.</p>
+
+<p>By importign the class ‘Flask’ we are importing the frame work for our app. Esentially, the app an instance of Flask. render_template is the funtion that we are using to render our HTML pages.</p>
+
+<p>Moving on, the route decorator is where, I think, all the magic happens.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">mainIndex</span><span class="p">():</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span></code></pre></figure>
+
+<p>The route decorator tells the server what path will run what function. With the above example (‘/’) the server renders index.html when the user enters the root url. In other words, it’s basically rendering the home page. 
+    Likewise, with the add rosary page you’d need to attach ‘/add_rosary’ onto the end of the url to tell the
+    server to run the addrosary function and render ‘add_rosary.html’</p>
+
+<p>The final chunk of code:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'IP'</span><span class="p">,</span> <span class="s">'0.0.0.0'</span><span class="p">),</span> <span class="n">port</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'PORT'</span><span class="p">,</span> <span class="mi">8080</span><span class="p">)),</span> <span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+<p>actually runs the app. This is the line code that specifies the IP adress the port, and launches the app.</p>
+
+<p>So here we have a pything file that launches a two page webapp. Rendering the HTML pages that we went over in the last post.</p>
+
+<p>Right now the web app doesnt actually do anything. As you can see in the code above the functions that render the HTML pages are not actually doing anything other than rendering the templates. In the next post we will write python code that will begin to insert things into the database that we created back in our first post, when we first started this journey.</p>
+
