@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Building The Forge</title>
-  <meta name="description" content="Building The Forge is a developer blog that takes you through the development of a personal web app that will be used to keep track of all of the rosaries th...">
+  <title>Building The Forge: Creating a User</title>
+  <meta name="description" content="Now that we have set up the bassis for are server.py and are html templates we are ready to start writing the code that will accsess our database.">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/">
+  <link rel="canonical" href="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html">
   <link rel="alternate" type="application/rss+xml" title="Building The Forge" href="/feed.xml">
   
   
@@ -62,60 +62,73 @@
 
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <h1 class="page-heading">Posts</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Building The Forge: Creating a User</h1>
+    <p class="post-meta"><time datetime="2016-12-05T00:00:00-05:00" itemprop="datePublished">Dec 5, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Now that we have set up the bassis for are server.py and are html templates we are ready to start 
+    writing the code that will accsess our database.</p>
+
+<p>Almost.</p>
+
+<p>Before we connect to our database we must first create a user by the principle of least privilage. 
+    Basically what we are doing is creating a user to acsess our database with the lowest privlages needed. 
+    This is because if we log in with our root acount, not only is it a security hazard, but if we write 
+    some sort of bad code we could unintentionally wipe out our entire database.</p>
+
+<p>So for the purposes of this app we need our user to do two things.</p>
+
+<ul>
+  <li>log on to our database</li>
+  <li>access the database when we search for rosaries.</li>
+  <li>add new rosaries to the database.</li>
+</ul>
+
+<p>In order ot do this we are going to grant our user two priviliages.</p>
+
+<ul>
+  <li>login</li>
+  <li>select</li>
+  <li>insert</li>
+</ul>
+
+<p>Login is pretty self explanitory. It will let us login. The select privlage will allow our user to read the database and select items from it to display in our webapp.
+    While the insert privlage will allow are user to add new items to our database.</p>
+
+<p>Now that we understand what are user will do we can create it.</p>
+
+<p>Open up postgress with your root account and execute the following command to create the user (For our purposes we will name 
+our roll theMasterSmith):</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+    create roll theMasterSmith</code></pre></figure>
+
+<p>Now that our roll is created we must grant it login privlages with this command:</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+    alter roll theMasterSmith with login </code></pre></figure>
+
+<p>we will then be asked ot enter our password. For securit reasons I will keep the password secrert. 
+    Take not of “alter roll” we use this command to alter any roll to give it a log in privlage.</p>
+
+<p>The next step is to grant our user select and insert privlage. For this we will use the grant command:</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+    grant select on rosaries to theMasterSmith 
+    grant insert on rosaroes to theMasterSmith</code></pre></figure>
+
+<p>Our user can now login to our database, select items, and insert them. Now we are finally 
+    ready to write some code in server.py that will allow our webapp to work with our databases.</p>
+
+
+  </div>
+
   
-  
-
-
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Dec 7, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/2016/12/07/server-database.html">Server Database</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 5, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/12/05/creating-a-roll.html">Building The Forge: Creating a User</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 5, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/12/05/setting-up-flask-template-server.html">Building The Forge: Flask Template Part 2</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Dec 1, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/12/01/setting-up-flask-template.html">Building The Forge: Flask Template Part 1</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Nov 30, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/11/30/Setting-Up-A-Database.html">Building The Forge: Database</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
+</article>
 
       </div>
     </main>

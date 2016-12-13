@@ -1,5 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-05T15:49:23-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington.  There will also be posts called &quot;detours&quot; that will show case skills that I have learned  are not part of Building The Forge. 
-</subtitle><entry><title type="html">Building The Forge: Flask Template Part 2</title><link href="http://localhost:4000/jekyll/update/2016/12/05/setting-up-flask-template-server.html" rel="alternate" type="text/html" title="Building The Forge: Flask Template Part 2" /><published>2016-12-05T00:00:00-05:00</published><updated>2016-12-05T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/05/setting-up-flask-template-server</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/05/setting-up-flask-template-server.html">&lt;p&gt;In our last post we talked about the html set up for our flask template. 
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-12T21:11:22-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington.  There will also be posts called &quot;detours&quot; that will show case skills that I have learned  are not part of Building The Forge. 
+</subtitle><entry><title type="html">Server Database</title><link href="http://localhost:4000/2016/12/07/server-database.html" rel="alternate" type="text/html" title="Server Database" /><published>2016-12-07T00:00:00-05:00</published><updated>2016-12-07T00:00:00-05:00</updated><id>http://localhost:4000/2016/12/07/server-database</id><content type="html" xml:base="http://localhost:4000/2016/12/07/server-database.html"></content><summary type="html"></summary></entry><entry><title type="html">Building The Forge: Creating a User</title><link href="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html" rel="alternate" type="text/html" title="Building The Forge: Creating a User" /><published>2016-12-05T00:00:00-05:00</published><updated>2016-12-05T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html">&lt;p&gt;Now that we have set up the bassis for are server.py and are html templates we are ready to start 
+    writing the code that will accsess our database.&lt;/p&gt;
+
+&lt;p&gt;Almost.&lt;/p&gt;
+
+&lt;p&gt;Before we connect to our database we must first create a user by the principle of least privilage. 
+    Basically what we are doing is creating a user to acsess our database with the lowest privlages needed. 
+    This is because if we log in with our root acount, not only is it a security hazard, but if we write 
+    some sort of bad code we could unintentionally wipe out our entire database.&lt;/p&gt;
+
+&lt;p&gt;So for the purposes of this app we need our user to do two things.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;log on to our database&lt;/li&gt;
+  &lt;li&gt;access the database when we search for rosaries.&lt;/li&gt;
+  &lt;li&gt;add new rosaries to the database.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In order ot do this we are going to grant our user two priviliages.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;login&lt;/li&gt;
+  &lt;li&gt;select&lt;/li&gt;
+  &lt;li&gt;insert&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Login is pretty self explanitory. It will let us login. The select privlage will allow our user to read the database and select items from it to display in our webapp.
+    While the insert privlage will allow are user to add new items to our database.&lt;/p&gt;
+
+&lt;p&gt;Now that we understand what are user will do we can create it.&lt;/p&gt;
+
+&lt;p&gt;Open up postgress with your root account and execute the following command to create the user (For our purposes we will name 
+our roll theMasterSmith):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+    create roll theMasterSmith&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now that our roll is created we must grant it login privlages with this command:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+    alter roll theMasterSmith with login &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;we will then be asked ot enter our password. For securit reasons I will keep the password secrert. 
+    Take not of “alter roll” we use this command to alter any roll to give it a log in privlage.&lt;/p&gt;
+
+&lt;p&gt;The next step is to grant our user select and insert privlage. For this we will use the grant command:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+    grant select on rosaries to theMasterSmith 
+    grant insert on rosaroes to theMasterSmith&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Our user can now login to our database, select items, and insert them. Now we are finally 
+    ready to write some code in server.py that will allow our webapp to work with our databases.&lt;/p&gt;</content><summary type="html">Now that we have set up the bassis for are server.py and are html templates we are ready to start 
+    writing the code that will accsess our database.</summary></entry><entry><title type="html">Building The Forge: Flask Template Part 2</title><link href="http://localhost:4000/jekyll/update/2016/12/05/setting-up-flask-template-server.html" rel="alternate" type="text/html" title="Building The Forge: Flask Template Part 2" /><published>2016-12-05T00:00:00-05:00</published><updated>2016-12-05T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/05/setting-up-flask-template-server</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/05/setting-up-flask-template-server.html">&lt;p&gt;In our last post we talked about the html set up for our flask template. 
     Today we will talk about the server.py file that launches our website, 
     and ties everything togeather.&lt;/p&gt;
 
