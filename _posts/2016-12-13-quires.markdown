@@ -26,11 +26,12 @@ Let's break the code down piece by piece to get a better understanding of what i
 | from            | key word to select which table we are reading                  | 
 | rosaries        | name of the table                                              | 
 
+
 We are not just giving the user the ability to select all rosaries. 
     we are also giving users the opertunity to search by the owner of the rosary 
     or the name. 
 
-for this we will add the the where and clauses. This will allow us to filter items. 
+for this we will add the where and the like clauses. This will allow us to filter items. 
     So for the example, let's say we want to find out every rosary we have made that is named "philomina"
 
 That select quiry would look like this: 
