@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Building The Forge: Creating a User"
-date:   2016-12-5 
+date:   2016-12-6
 categories: jekyll update
 ---
 

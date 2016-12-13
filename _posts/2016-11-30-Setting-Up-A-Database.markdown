@@ -38,7 +38,7 @@ CREATE TABLE rosaries(
    hope_bead varchar(30) NOT NULL, 
    center_piece varchar(30) NOT NULL, 
    crucifix varchar(30) NOT NULL, 
-   color varchar(30) NOT NULL,
+   color carchar(30) NOT NULL
    recipiant varchar(30) NOT NULL
  );
 {% endhighlight %}

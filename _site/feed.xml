@@ -1,5 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-12T21:38:06-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington.  There will also be posts called &quot;detours&quot; that will show case skills that I have learned  are not part of Building The Forge. 
-</subtitle><entry><title type="html">Building The Forge: Connecting to the Server</title><link href="http://localhost:4000/jekyll/update/2016/12/07/server-database.html" rel="alternate" type="text/html" title="Building The Forge: Connecting to the Server" /><published>2016-12-07T00:00:00-05:00</published><updated>2016-12-07T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/07/server-database</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/07/server-database.html">&lt;p&gt;In review we have acomplised quite a bit up unitl this point.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-13T17:44:07-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington.  There will also be posts called &quot;detours&quot; that will show case skills that I have learned  are not part of Building The Forge. 
+</subtitle><entry><title type="html">Building The Forge: Quires</title><link href="http://localhost:4000/jekyll/update/2016/12/13/quires.html" rel="alternate" type="text/html" title="Building The Forge: Quires" /><published>2016-12-13T00:00:00-05:00</published><updated>2016-12-13T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/13/quires</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/13/quires.html">&lt;p&gt;Before we insert oue query statements into the server side of our code, I want to first 
+    give a quick run down of the type of queries we will be using.&lt;/p&gt;
+
+&lt;p&gt;The first is a select statement.&lt;/p&gt;
+
+&lt;p&gt;We are dealing with two types of select statements in our web app. The first is one in which we 
+    select all the items in our database and display them to the user. That statement will look like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+    select * from rosaries&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Let’s break the code down piece by piece to get a better understanding of what is going on.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;part of command&lt;/th&gt;
+      &lt;th&gt;function&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Select&lt;/td&gt;
+      &lt;td&gt;tells us that we will be selecting items from the table&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;*&lt;/td&gt;
+      &lt;td&gt;tells us what we are selecting. in this case * means all items&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;from&lt;/td&gt;
+      &lt;td&gt;key word to select which table we are reading&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;rosaries&lt;/td&gt;
+      &lt;td&gt;name of the table&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We are not just giving the user the ability to select all rosaries. 
+    we are also giving users the opertunity to search by the owner of the rosary 
+    or the name.&lt;/p&gt;
+
+&lt;p&gt;for this we will add the the where and clauses. This will allow us to filter items. 
+    So for the example, let’s say we want to find out every rosary we have made that is named “philomina”&lt;/p&gt;
+
+&lt;p&gt;That select quiry would look like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+select * from rosaries where rosary_name like 'philomina';  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;the where clause tells us which item in the table we are looking at, 
+    and the like clause is the equivilant to an == operator in c++ or java, it 
+    telling us what kind of items we want to pull from our database.&lt;/p&gt;
+
+&lt;p&gt;like wise if we want to search for all rosaries we have made for Maddie Smith our quiry would look like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+select * from rosaries where recipiant like 'Maddie Smith';  &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;we can also combine these two quiries with the OR clause. The Query we will end up placing in our searc funtion 
+    in server.py will end up looking like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+select * from rosaries where recipiant like 'Maddie Smith' or where rosary_name like 'philomina';&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;this will give us all the rosaies we have made for Maddie Smith, and all the rosaries we have named 
+    philomina.&lt;/p&gt;
+
+&lt;p&gt;The next funtion our web app has is that to add rosaries to the database. For this we will use an insert statement.&lt;/p&gt;
+
+&lt;p&gt;Let’s say we want to insert a rosary we have just made for  John Doe. 
+    it is a silver rosary with blue beads, a green hope bead, named Kolbe, with a sacred heart centerpiece and a
+    sait bennidict crucifix. the insert statment will look like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-postgresql&quot; data-lang=&quot;postgresql&quot;&gt; 
+insert into rosaries (rosary_name, our_father_bead, hail_mary_bead, hope_bead, center_piece, crucifix, color) 
+    values ('kolbe', 'blue', 'blue', 'green', 'sacred heart', 'benidict', 'silver', 'John Doe'); &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In this statement the into clause is telling us which table we are inserting into. We then list all of the columns in the table we are filling, followed by the values we are filling them with.&lt;/p&gt;
+
+&lt;p&gt;In the next post we will integrate these quires into our server.py to finally give our webapp the functionality we 
+    have been building up to.&lt;/p&gt;</content><summary type="html">Before we insert oue query statements into the server side of our code, I want to first 
+    give a quick run down of the type of queries we will be using.</summary></entry><entry><title type="html">Building The Forge: Connecting to the Server</title><link href="http://localhost:4000/jekyll/update/2016/12/07/server-database.html" rel="alternate" type="text/html" title="Building The Forge: Connecting to the Server" /><published>2016-12-07T00:00:00-05:00</published><updated>2016-12-07T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/07/server-database</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/07/server-database.html">&lt;p&gt;In review we have acomplised quite a bit up unitl this point.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;we created our database&lt;/li&gt;
@@ -109,7 +193,7 @@
 &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'IP'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'0.0.0.0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'PORT'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Now that we connected to our database, and created our cursor we have one final step complete the functionality of our web app. 
-    That is to write our quires.&lt;/p&gt;</content><summary type="html">In review we have acomplised quite a bit up unitl this point.</summary></entry><entry><title type="html">Building The Forge: Creating a User</title><link href="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html" rel="alternate" type="text/html" title="Building The Forge: Creating a User" /><published>2016-12-05T00:00:00-05:00</published><updated>2016-12-05T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html">&lt;p&gt;Now that we have set up the bassis for are server.py and are html templates we are ready to start 
+    That is to write our quires.&lt;/p&gt;</content><summary type="html">In review we have acomplised quite a bit up unitl this point.</summary></entry><entry><title type="html">Building The Forge: Creating a User</title><link href="http://localhost:4000/jekyll/update/2016/12/06/creating-a-roll.html" rel="alternate" type="text/html" title="Building The Forge: Creating a User" /><published>2016-12-06T00:00:00-05:00</published><updated>2016-12-06T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/06/creating-a-roll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/06/creating-a-roll.html">&lt;p&gt;Now that we have set up the bassis for are server.py and are html templates we are ready to start 
     writing the code that will accsess our database.&lt;/p&gt;
 
 &lt;p&gt;Almost.&lt;/p&gt;
@@ -362,7 +446,7 @@ CREATE TABLE rosaries(
    hope_bead varchar(30) NOT NULL, 
    center_piece varchar(30) NOT NULL, 
    crucifix varchar(30) NOT NULL, 
-   color varchar(30) NOT NULL,
+   color carchar(30) NOT NULL
    recipiant varchar(30) NOT NULL
  );&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 

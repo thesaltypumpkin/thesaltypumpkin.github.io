@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Building The Forge: Database</title>
-  <meta name="description" content="The database for The Forge was created using postgresql. If you would like to create your own database you can follow these basic steps on how I created mine...">
+  <title>Building The Forge: Quires</title>
+  <meta name="description" content="Before we insert oue query statements into the server side of our code, I want to first give a quick run down of the type of queries we will be using.">
 
   <link rel="stylesheet" href="/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/jekyll/update/2016/11/30/Setting-Up-A-Database.html">
+  <link rel="canonical" href="http://localhost:4000/jekyll/update/2016/12/13/quires.html">
   <link rel="alternate" type="application/rss+xml" title="Building The Forge" href="/feed.xml">
   
   
@@ -65,64 +65,95 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Building The Forge: Database</h1>
-    <p class="post-meta"><time datetime="2016-11-30T00:00:00-05:00" itemprop="datePublished">Nov 30, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">Building The Forge: Quires</h1>
+    <p class="post-meta"><time datetime="2016-12-13T00:00:00-05:00" itemprop="datePublished">Dec 13, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>The database for The Forge was created using postgresql. 
-   If you would like to create your own database 
-   you can follow these basic steps on how I created mine and adapt
-   information as needed to fit your own needs.</p>
+    <p>Before we insert oue query statements into the server side of our code, I want to first 
+    give a quick run down of the type of queries we will be using.</p>
 
-<p>The first I needed to create the database it’s self. I did that as follows:</p>
+<p>The first is a select statement.</p>
 
-<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql">CREATE DATABASE The_forge</code></pre></figure>
-
-<p>Now I needed tables in my database. 
-   For the first version of this webapp I decided to keep things
-   pretty simple. 
-   As the database gets more complex you will see follow up posts describing
-   the changes I made.</p>
-
-<p>I started things with just one table. 
-   This table will store all of my information for a rosary that I have made. 
-   As time goes on and we develop The Forge we will begin to Normalize our tables. 
-   Naturlly, once we begin the process of Normalization will will see more tables emerge.</p>
-
-<p>creating the table looked like this:</p>
+<p>We are dealing with two types of select statements in our web app. The first is one in which we 
+    select all the items in our database and display them to the user. That statement will look like this:</p>
 
 <figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
-CREATE TABLE rosaries( 
-   r_id serial primary key
-   rosary_name varchar(30) NOT NULL, 
-   our_father_bead varchar(30) NOT NULL, 
-   hail_Mary_bead varchar(30) NOT NULL, 
-   hope_bead varchar(30) NOT NULL, 
-   center_piece varchar(30) NOT NULL, 
-   crucifix varchar(30) NOT NULL, 
-   color carchar(30) NOT NULL
-   recipiant varchar(30) NOT NULL
- );</code></pre></figure>
+    select * from rosaries</code></pre></figure>
 
-<p>To give a little context for those columns in the chart:</p>
-<ul>
-  <li>rosary_name is the name given to the rosary, usually adapted from the saint prayed with.</li>
-  <li>our_father_bead, hail_mary_bead, and hope_bead are the colors for the three types of beads on the rosary.</li>
-  <li>center_piece and crucifix are the type of centerpiece and crucifix that I used.</li>
-  <li>color is the color of the rosary findings (gold, silver, ect.).</li>
-  <li>recipient is who I gave the rosary to.</li>
-</ul>
+<p>Let’s break the code down piece by piece to get a better understanding of what is going on.</p>
 
-<p>Once the table was created I could start adding things to it. 
-A basic insert statement looked like this:</p>
+<table>
+  <thead>
+    <tr>
+      <th>part of command</th>
+      <th>function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Select</td>
+      <td>tells us that we will be selecting items from the table</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>tells us what we are selecting. in this case * means all items</td>
+    </tr>
+    <tr>
+      <td>from</td>
+      <td>key word to select which table we are reading</td>
+    </tr>
+    <tr>
+      <td>rosaries</td>
+      <td>name of the table</td>
+    </tr>
+  </tbody>
+</table>
 
-<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql">INSERT into rosaries (rosary_name, our_father_bead, hail_mary_bead, hope_bead, center_piece, crucifix, color, recipiant)
-   VALUES (Albert, blue, redswirl, red, miraculous medal, standard crucifix, silver, maddie)</code></pre></figure>
+<p>We are not just giving the user the ability to select all rosaries. 
+    we are also giving users the opertunity to search by the owner of the rosary 
+    or the name.</p>
 
-<p>You will see the types of quires that I used to acsess the table 
-   when I talk about how I set up the actual web-app using flask, so stay tuned for that.</p>
+<p>for this we will add the the where and clauses. This will allow us to filter items. 
+    So for the example, let’s say we want to find out every rosary we have made that is named “philomina”</p>
 
+<p>That select quiry would look like this:</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+select * from rosaries where rosary_name like 'philomina';  </code></pre></figure>
+
+<p>the where clause tells us which item in the table we are looking at, 
+    and the like clause is the equivilant to an == operator in c++ or java, it 
+    telling us what kind of items we want to pull from our database.</p>
+
+<p>like wise if we want to search for all rosaries we have made for Maddie Smith our quiry would look like this:</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+select * from rosaries where recipiant like 'Maddie Smith';  </code></pre></figure>
+
+<p>we can also combine these two quiries with the OR clause. The Query we will end up placing in our searc funtion 
+    in server.py will end up looking like this:</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+select * from rosaries where recipiant like 'Maddie Smith' or where rosary_name like 'philomina';</code></pre></figure>
+
+<p>this will give us all the rosaies we have made for Maddie Smith, and all the rosaries we have named 
+    philomina.</p>
+
+<p>The next funtion our web app has is that to add rosaries to the database. For this we will use an insert statement.</p>
+
+<p>Let’s say we want to insert a rosary we have just made for  John Doe. 
+    it is a silver rosary with blue beads, a green hope bead, named Kolbe, with a sacred heart centerpiece and a
+    sait bennidict crucifix. the insert statment will look like this:</p>
+
+<figure class="highlight"><pre><code class="language-postgresql" data-lang="postgresql"> 
+insert into rosaries (rosary_name, our_father_bead, hail_mary_bead, hope_bead, center_piece, crucifix, color) 
+    values ('kolbe', 'blue', 'blue', 'green', 'sacred heart', 'benidict', 'silver', 'John Doe'); </code></pre></figure>
+
+<p>In this statement the into clause is telling us which table we are inserting into. We then list all of the columns in the table we are filling, followed by the values we are filling them with.</p>
+
+<p>In the next post we will integrate these quires into our server.py to finally give our webapp the functionality we 
+    have been building up to.</p>
 
   </div>
 
