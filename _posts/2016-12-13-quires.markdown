@@ -5,7 +5,8 @@ date:   2016-12-13
 categories: jekyll update
 ---
 
-Before we insert oue query statements into the server side of our code, I want to first 
+Before we insert oue query statements into the server side of our code, I want to first make good on the 
+    promise from the end of our first post and 
     give a quick run down of the type of queries we will be using. 
 
 The first is a select statement. 
