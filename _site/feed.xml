@@ -1,5 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-12T21:11:22-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington.  There will also be posts called &quot;detours&quot; that will show case skills that I have learned  are not part of Building The Forge. 
-</subtitle><entry><title type="html">Server Database</title><link href="http://localhost:4000/2016/12/07/server-database.html" rel="alternate" type="text/html" title="Server Database" /><published>2016-12-07T00:00:00-05:00</published><updated>2016-12-07T00:00:00-05:00</updated><id>http://localhost:4000/2016/12/07/server-database</id><content type="html" xml:base="http://localhost:4000/2016/12/07/server-database.html"></content><summary type="html"></summary></entry><entry><title type="html">Building The Forge: Creating a User</title><link href="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html" rel="alternate" type="text/html" title="Building The Forge: Creating a User" /><published>2016-12-05T00:00:00-05:00</published><updated>2016-12-05T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html">&lt;p&gt;Now that we have set up the bassis for are server.py and are html templates we are ready to start 
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2016-12-12T21:38:06-05:00</updated><id>http://localhost:4000//</id><title type="html">Building The Forge</title><subtitle>Building The Forge is a developer blog that takes you through  the development of a personal web app that will be used to keep  track of all of the rosaries that I make for my ministry The Forge Custom Rosaries.  The skills showcased on this website were learned in COMPSCI 350 (databases) at  The University of Mary Washington.  There will also be posts called &quot;detours&quot; that will show case skills that I have learned  are not part of Building The Forge. 
+</subtitle><entry><title type="html">Building The Forge: Connecting to the Server</title><link href="http://localhost:4000/jekyll/update/2016/12/07/server-database.html" rel="alternate" type="text/html" title="Building The Forge: Connecting to the Server" /><published>2016-12-07T00:00:00-05:00</published><updated>2016-12-07T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/07/server-database</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/07/server-database.html">&lt;p&gt;In review we have acomplised quite a bit up unitl this point.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;we created our database&lt;/li&gt;
+  &lt;li&gt;set up our html template&lt;/li&gt;
+  &lt;li&gt;wrote a basic server.py&lt;/li&gt;
+  &lt;li&gt;created a user to access our database from our server&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now we are ready to write the code to access our server. If you recall our server currently looks like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt; 
+
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render_template&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c&quot;&gt;#render the home page&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mainIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render_template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'index.html'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# render our add rosary page &lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/add_rosary'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; 
+    
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render_template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'add_rosary.html'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# start the server&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'IP'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'0.0.0.0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'PORT'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;we are going to connect to our database using psycopg2 adapter. In order to use this you must import the psychopg2 
+    library and update the package.&lt;/p&gt;
+
+&lt;p&gt;The steps to connect to the databse are as follows, and prepare to execute quires are as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;connect with psycopg2.connect&lt;/li&gt;
+  &lt;li&gt;create a cursor object to interact with the database&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To acomplish step one we will create a function to connect to the database. the function is going to look something like this (recall that our database is called The_forge, our user is theMasterSmith, and our password is secret):&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt; 
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;connect_to_rosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dbname = The_forge user = theMasterSmith password = ***** host = localhost'&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psycopg2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'nope'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In the above function we create our connection string that we will feed to psycopg2.connect. The string tells 
+    the server what database we are connecting to, what our user’s name is, our password, as well as our host
+    As stated above we then feed that string into the function to connect to the database, with an expcept
+    statement that will print ‘nope’ if we screwed something up for debugging purposes.&lt;/p&gt;
+
+&lt;p&gt;Now that our function is complete we can move on to step two.&lt;/p&gt;
+
+&lt;p&gt;Step two takes place inside our functions that render our pages. Because both of are pages are accessing our data
+    base we will run this code in both our functions:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt; 
+    &lt;span class=&quot;n&quot;&gt;con&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connect_to_rosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;cur&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt; &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;the first line of code runs the function we just wrote to connect to the database, and the second line of 
+    code creates our cursor object.&lt;/p&gt;
+
+&lt;p&gt;our server.py file now looks something like this:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt; 
+
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;psycopg2.extras&lt;/span&gt; 
+
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;flask&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render_template&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Flask&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;connect_to_rosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'dbname = The_forge user = theMasterSmith password = ***** host = localhost'&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;psycopg2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connectionString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; 
+            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'nope'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#render the home page&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# render the home page &lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mainIndex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;con&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connect_to_rosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;cur&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;         
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render_template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'index.html'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# render our add rosary page &lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@app.route&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/add_rosary'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;con&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;connect_to_rosary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;cur&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;con&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cursor&lt;/span&gt;         
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;render_template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'add_rosary.html'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# start the server&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'IP'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'0.0.0.0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'PORT'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;debug&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now that we connected to our database, and created our cursor we have one final step complete the functionality of our web app. 
+    That is to write our quires.&lt;/p&gt;</content><summary type="html">In review we have acomplised quite a bit up unitl this point.</summary></entry><entry><title type="html">Building The Forge: Creating a User</title><link href="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html" rel="alternate" type="text/html" title="Building The Forge: Creating a User" /><published>2016-12-05T00:00:00-05:00</published><updated>2016-12-05T00:00:00-05:00</updated><id>http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2016/12/05/creating-a-roll.html">&lt;p&gt;Now that we have set up the bassis for are server.py and are html templates we are ready to start 
     writing the code that will accsess our database.&lt;/p&gt;
 
 &lt;p&gt;Almost.&lt;/p&gt;
